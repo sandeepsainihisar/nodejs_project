@@ -1,0 +1,47 @@
+<%- include('./header') %>
+
+<form method="post" class="mx-1 mx-md-4">
+
+	<div class="d-flex flex-row align-items-center mb-4">
+		<i class="fas fa-user fa-lg me-3 fa-fw"></i>
+		<div class="form-outline flex-fill mb-0">
+			<label class="form-label" for="form3Example1c">User Name</label>
+			<input type="text" name="username" id="uname" value="<%=data.username %>" class="form-control" required/>
+			
+		</div>
+	</div>
+
+	<div class="d-flex flex-row align-items-center mb-4">
+		<i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+		<div class="form-outline flex-fill mb-0">
+			<label class="form-label" for="form3Example3c">Your Email</label>
+			<input type="email" name="email" id="email" value="<%=data.email %>" class="form-control" required/>
+			
+		</div>
+	</div>
+
+	<div class="d-flex flex-row align-items-center mb-4">
+		<i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+		<div class="form-outline flex-fill mb-0">
+			<label class="form-label" for="form3Example4c">Password</label>
+			<input type="password" name="password" id="pwd" value="<%=data.password %>" class="form-control" required/>
+			
+		</div>
+	</div>
+
+	<div class="d-flex flex-row align-items-center mb-4">
+		<i class="fas fa-key fa-lg me-3 fa-fw"></i>
+		<div class="form-outline flex-fill mb-0">
+			<label class="form-label" for="form3Example4cd">Repeat your
+				password</label>
+			<input type="password" name="cpassword" id="cpwd" value="<%=data.cpassword %>" class="form-control" required/>
+			
+		</div>
+	</div>
+
+
+	<div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+		<button type="submit" onclick="window.location" class="btn btn-primary btn-lg">Update</button>
+	</div>
+
+</form>

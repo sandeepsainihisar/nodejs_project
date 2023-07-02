@@ -1,0 +1,56 @@
+<%- include("./header.ejs") %>
+
+    <%- include("./left.ejs") %>
+        <% if(data.length>0) { %>
+
+            <table border="1" cellpadding="10" cellspacing="5">
+                <tr style="background-color: #ffffff;margin-left: 10px; font-size: 20px;">
+                    <th align="center">Index</th>
+                    <th>Enter Details</th>
+                    <th>Sub Details</th>
+
+                    <th>Enter Description</th>
+                    <th>Attache File</th>
+                </tr>
+                <% for(var j=0; j<data.length; j++) { %>
+                    <tr style="background-color: rgb(108, 237, 85); font-size: 16px;">
+                        
+                        <td>
+                            <%= data[j].details %>
+                        </td>
+                        <td>
+                            <%= data[j].subdetails %>
+                        </td>
+                        <td>
+                            <%= data[j].enterdesc %>
+                        </td>
+                       <td>
+                           
+                        <%= data[j].attachfile %>   
+                            </td>
+                        
+
+                        <td>
+                            <a href='/editproduct/<%= data[j]._id %>'>
+                                <button type="button" class="btn btn-primary">
+                                    Edit
+                                </button>
+                            </a>
+                        </td>
+                            <td>
+                            <a href='/deleteproduct/<%= data[j]._id %>'>
+                                <button type="button" class="btn btn-Danger">
+                                    Delete
+                                </button>
+                            </a>
+
+
+                        </td>
+                    </tr>
+                    <% } %>
+
+            </table>
+
+            <% } else { %>
+              No Record Found
+              <% } %>

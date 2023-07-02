@@ -1,0 +1,48 @@
+<%- include('./header') %>
+
+
+<form method="post" class="mx-1 mx-md-4">
+
+	<div class="d-flex flex-row align-items-center mb-4">
+		<i class="fas fa-user fa-lg me-3 fa-fw"></i>
+		<div class="form-outline flex-fill mb-0">
+			<input type="text" name="details" id="uname" value="<%=data.details %>" class="form-control" required/>
+			<label class="form-label" for="form3Example1c">details</label>
+		</div>
+	</div>
+
+	<div class="d-flex flex-row align-items-center mb-4">
+		<i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+		<div class="form-outline flex-fill mb-0">
+			<input type="text" name="subdetails" id="email" value="<%=data.subdetails %>" class="form-control" required/>
+			<label class="form-label" for="form3Example3c">Your Email</label>
+		</div>
+	</div>
+
+	<div class="d-flex flex-row align-items-center mb-4">
+		<i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+		<div class="form-outline flex-fill mb-0">
+			<input type="text" name="enterdesc" id="pwd" value="<%=data.enterdesc %>" class="form-control" required/>
+			<label class="form-label" for="form3Example4c">Password</label>
+		</div>
+	</div>
+
+	<div class="d-flex flex-row align-items-center mb-4">
+		<i class="fas fa-key fa-lg me-3 fa-fw"></i>
+		<div class="form-outline flex-fill mb-0">
+			<input type="file" name="attachfile" id="cpwd" value="<%=data.attachfile %>" class="form-control" required/>
+			<label class="form-label" for="form3Example4cd">Repeat your
+				password</label>
+		</div>
+	</div>
+
+
+	<div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+		<button type="submit" onclick="window.location" class="btn btn-primary btn-lg">Update</button>
+	</div>
+
+</form>
+<!-- 
+
+
+	

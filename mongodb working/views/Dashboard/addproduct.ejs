@@ -1,0 +1,37 @@
+<%- include("./header.ejs") %>
+
+    <%- include("./left.ejs") %>
+
+        <div class="col-sm-9">
+            <form action="/addproduct" method="post">
+                <div class="mb-3 mt-3">
+                    <label for="text" class="form-label">Enter Details:</label>
+                    <input type="text" class="form-control" id="details" placeholder="Enter details here"
+                        name="details">
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Enter Sub Details:</label>
+                    <input type="text" class="form-control" id="qulification" placeholder="Enter sub details"
+                        name="subdetails">
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Enter Description:</label>
+                    <input type="text" class="form-control" id="qulification" placeholder="Enter Description"
+                        name="enterdesc">
+                </div>
+                <div class="mb-3">
+                    <label class="mt-3" for="Choose File">
+                        <h5><b>Attache File*:</b></h5>
+                    </label><input class="form-control" id="" type="file" name="attachfile">
+
+                </div>
+                <!-- <div class="form-check mb-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                    </label>
+                </div> -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+
