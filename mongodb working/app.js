@@ -308,7 +308,7 @@ router.get('/viewcontact', async (req, res) => {
 //23052023 dated 
 
 // delete user by id
-router.get('/delete/register/:id', async (req, res) => {
+router.get('/deleteregister/:id', async (req, res) => {
 	User.findByIdAndDelete(req.params.id).then(user => {
 		if (user) {
 			console.log("get_deleteregister if")
@@ -342,21 +342,22 @@ router.get('/deleteproduct/:id', async (req, res) => {
 
 
 
-router.get('/edit', function (req, res) {
-	res.render('dashboaard/edit');
-});
+// router.get('/edit', function (req, res) {
+// 	res.render('dashboaard/edit');
+// });
 
 
 // 24052023
 router.get('/editregister/:id', async (req, res) => {
 	try {
 		const update = await User.findById(req.params.id);
-		res.render('Dashboard/edit', { data: update });
+		res.render('Dashboard/editregister', { data: update });
 	} catch (err) {
 		console.log(err);
 		//res.redirect('/viewregistration')
 	}
 });
+
 router.post('/editregister/:id', async (req, res) => {
 	var updatelogin = {
 		username: req.body.username,
@@ -368,7 +369,7 @@ router.post('/editregister/:id', async (req, res) => {
 		await User.findByIdAndUpdate(req.params.id, updatelogin);
 		res.redirect('/viewregister');
 	} catch (err) {
-		res.redirect('/edit' + req.params.id);
+		res.redirect('/editregister' + req.params.id);
 	}
 });
 
@@ -377,11 +378,12 @@ router.post('/editregister/:id', async (req, res) => {
 
 router.get('/editproduct/:id', async (req, res) => {
 	try {
+		console.log("edit_product try succesfull");
 		const productupdate = await Product.findById(req.params.id);
-		res.render('Dashboard/edit', { data: productupdate });
+		res.render('Dashboard/editproduct', { data: productupdate });
 	} catch (err) {
 		console.log(err);
-		//res.redirect('/viewregistration')
+		//res.redirect('/viewproduct')
 	}
 });
 router.post('/editproduct/:id', async (req, res) => {
@@ -462,6 +464,7 @@ app.get("/logout",(req,res)=>{
 		res.redirect("/login")
 	}
 });
+
 router.get('/editcontact/:id',async(req,res)=>{
 	try{
 		const data=await Contact.findById(req.params.id);
@@ -471,6 +474,7 @@ router.get('/editcontact/:id',async(req,res)=>{
 		console.log(err);
 	}
 });
+
 router.post('editcontact/:id',async (req,res)=>{
 	try{
 		const updateviewcontact = {
@@ -483,7 +487,7 @@ router.post('editcontact/:id',async (req,res)=>{
 		const data = await User2.findByIdAndUpdate(req.params.id,updateviewcontact)
 		console.log(data)
 		res.render('/dashboard/viewproduct',{data:data})
-		res.redirect('vewproduct')
+		res.redirect('viewproduct')
 	}
 	catch(err){
 		console.log(err)
