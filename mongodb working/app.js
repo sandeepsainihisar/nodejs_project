@@ -467,9 +467,10 @@ app.get("/logout",(req,res)=>{
 
 router.get('/editcontact/:id',async(req,res)=>{
 	try{
+		console.log("edit_get try contact worked")
 		const data=await Contact.findById(req.params.id);
 		console.log(data);
-		res.render('dashboard/product_edit',{data:data});
+		res.render('dashboard/editcontact',{data:data});
 	} catch (err){
 		console.log(err);
 	}
@@ -477,19 +478,22 @@ router.get('/editcontact/:id',async(req,res)=>{
 
 router.post('editcontact/:id',async (req,res)=>{
 	try{
+		console.log("edit post contact try entered")
 		const updateviewcontact = {
-			details:req.body.details,
-			subdetails:req.body.subdetails,
-			enterdesc:req.body.enterdesc
+			namecon:req.body.namecon,
+			emailcon:req.body.emailcon,
+			subjectcon:req.body.subjectcon,
+			msgcon:req.body.msgcon
 			
 
 		};
-		const data = await User2.findByIdAndUpdate(req.params.id,updateviewcontact)
+		const data = await Contact.findByIdAndUpdate(req.params.id,updateviewcontact)
 		console.log(data)
-		res.render('/dashboard/viewproduct',{data:data})
-		res.redirect('viewproduct')
+		res.render('/dashboard/viewcontact',{data:data})
+		res.redirect('viewcontact')
 	}
 	catch(err){
+		console.log("post conatct api catch error ended")
 		console.log(err)
 	}
 })
