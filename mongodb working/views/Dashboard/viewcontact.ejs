@@ -2,60 +2,55 @@
 
     <%- include("./left.ejs") %>
         <% if(data.length>0) { %>
-        <table border="1">
-            <tr style="background-color: #ffffff;margin-left: 10px; font-size: 20px;">
-                <th align="center">Index</th>
-                <th>UserName</th>
-                <th>Email</th>
-
-                <th>Password</th>
-                <!-- <th>Action</th> -->
-            </tr>
-            <% for(var i=0; i<data.length; i++) { %>
-                <tr style="background-color: rgb(250, 172, 227); font-size: 16px;">
-                    <td>
-                        <%= i %>
-                    </td>
-                    <td>
-                        <%= data[i].namecon %>
-                    </td>
-                    <td>
-                        <%= data[i].emailcon %>
-                    </td>
-                    <td>
-                        <%= data[i].subjectcon %>
-                    </td>
-                    
-                    <td>
-                        <%= data[i].msgcon %>
-                    </td>
-
-                    <td>
-                        <a href='/editcontact/<%= data[i]._id %>'>
-                            <button type="button" class="btn btn-primary">
-                                Edit
-                            </button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href='/deletecontactus/<%= data[i]._id %>'>
-                            <button type="button" class="btn btn-Danger">
-                                Delete
-                            </button>
-                        </a>
-
-
-                    </td>
+            <table border="1">
+                <tr style="background-color: #ffffff;margin-left: 10px; font-size: 20px;">
+                    <th align="center">Index</th>
+                    <th>Name</th>
+                    <th>Email address</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                    <!-- <th>Action</th> -->
                 </tr>
+                <% for(var i=0; i<data.length; i++) { %>
+                    <tr style="background-color: rgb(250, 172, 227); font-size: 16px;">
+                        <td>
+                            <%= i %>
+                        </td>
+                        <td>
+                            <%= data[i].namecon %>
+                        </td>
+                        <td>
+                            <%= data[i].emailcon %>
+                        </td>
+                        <td>
+                            <%= data[i].subjectcon %>
+                        </td>
+
+                        <td>
+                            <%= data[i].msgcon %>
+                        </td>
+
+                        <td>
+                            <a href='/editcontact/<%= data[i]._id %>'>
+                                <button type="button" class="btn btn-primary">
+                                    Edit
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href='/deletecontactus/<%= data[i]._id %>'>
+                                <button type="button" class="btn btn-Danger">
+                                    Delete
+                                </button>
+                            </a>
+
+
+                        </td>
+                    </tr>
+                    <% } %>
+
+            </table>
+
+            <% } else { %>
+                No Record Found
                 <% } %>
-
-        </table>
-
-        <% } else { %>
-            No Record Found
-            <% } %>
-
-
-
-
-            
