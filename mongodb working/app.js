@@ -42,7 +42,7 @@ var sessionChecker = (req, res, next) => {
 
 
 require("./model/connection")
-var infoLogger = require('./common/logger');
+//var infoLogger = require('./common/logger');
 var User = require('./model/registrationSchema');
 
 var Contact = require('./model/contactschema');
@@ -98,7 +98,7 @@ app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
 	res.render('index');
-	infoLogger("hi logged in ");
+	//infoLogger("hi logged in ");
 });
 
 
@@ -266,7 +266,7 @@ router.post('/addproduct', (req, res) => {
 		enterdesc: req.body.enterdesc,
 		attachfile: req.body.attachfile
 	});
-	
+
 	console.log("post_addproduct : saving data");
 
 	product.save().then(() => {
@@ -274,9 +274,9 @@ router.post('/addproduct', (req, res) => {
 	})
 		.catch((err) => {
 			console.log(err);
-			
+
 		})
-		
+
 	console.log("post_addproduct : ending");
 });
 
@@ -426,28 +426,6 @@ const fileFilter = (req, file, cb) => {
 
 let upload = multer({ storage, fileFilter });
 
-// router.get('/addproduct', upload.single('addproduct'), function (req, res) {
-// 	res.render('Dashboard/addproduct');
-// });
-
-
-
-
-
-// router.get('/viewcontact', function (req, res) {
-// 	res.render('Dashboard/viewcontact');
-// });
-
-router.get('/viewcontact', async (req, res) => {
-	try {
-		const data = await Product.find({});
-		res.render('Dashboard/viewcontact', { data: data });
-
-		console.log(data);
-	} catch (err) {
-		console.log(err)
-	}
-});
 
 
 app.use('/', router);	// this defaul////// page 
@@ -458,22 +436,23 @@ const server = app.listen(5555, function () {
 
 
 // LOgout API
-app.get("/logout",(req,res)=>{
-	if(req.session.user && req.cookies.user_sid){
+app.get("/logout", (req, res) => {
+	if (req.session.user && req.cookies.user_sid) {
 		res.clearCookie("user_sid");
 		res.redirect("/login")
-	}else{
+	} else {
 		res.redirect("/login")
 	}
 });
 
-router.get('/editcontact/:id',async(req,res)=>{
-	try{
+router.get('/editcontact/:id', async (req, res) => {
+	try {
 		console.log("edit_get try contact worked")
-		const data=await Contact.findById(req.params.id);
+		console.log("req.params.id = " + req.params.id)
+		const data = await Contact.findById(req.params.id);
 		console.log(data);
-		res.render('dashboard/editcontact',{data:data});
-	} catch (err){
+		res.render('dashboard/editcontact', { data: data });
+	} catch (err) {
 		console.log(err);
 	}
 });
@@ -486,7 +465,7 @@ router.get('/editcontact/:id',async(req,res)=>{
 // 			emailcon:req.body.emailcon,
 // 			subjectcon:req.body.subjectcon,
 // 			msgcon:req.body.msgcon
-			
+
 
 // 		};
 // 		const data = await Contact.findByIdAndUpdate(req.params.id,updateviewcontact)
@@ -501,24 +480,42 @@ router.get('/editcontact/:id',async(req,res)=>{
 // })
 
 
-router.post('/editcontact/:id', async (req, res) => {
-	try{
-		console.log("edit post contact try entered")
-		const updateviewcontact = {
-			namecon:req.body.namecon,
-			emailcon:req.body.emailcon,
-			subjectcon:req.body.subjectcon,
-			msgcon:req.body.msgcon
-			
+// router.post('/editcontact/:id', async (req, res) => {
+// 	try {
+// 		console.log("edit post contact try entered")
+// 		const updateviewcontact = {
+// 			namecon: req.body.namecon,
+// 			emailcon: req.body.emailcon,
+// 			subjectcon: req.body.subjectcon,
+// 			msgcon: req.body.msgcon
 
-		};
-		const data = await Contact.findByIdAndUpdate(req.params.id,updateviewcontact)
-		console.log(data)
-		res.render('/dashboard/viewcontact',{data:data})
-		res.redirect('viewcontact')
+
+// 		};
+// 		const data = await Contact.findByIdAndUpdate(req.params.id, updateviewcontact)
+// 		console.log(data)
+// 		res.render('/dashboard/viewcontact', { data: data })
+// 		res.redirect('viewabccontact')
+// 		console.log("post conatct api try ended")
+// 	}
+// 	catch (err) {
+// 		console.log("post conatct api catch error ended")
+// 		console.log(err)
+// 	}
+// })
+router.post('/editcontact/:id', async (req, res) => {
+	try {
+	  const updateContact = {
+		namecon: req.body.namecon,
+		emailcon: req.body.emailcon,
+		subjectcon: req.body.subjectcon,
+		msgcon: req.body.msgcon
+	  };
+  
+	  await Contact.findByIdAndUpdate(req.params.id, updateContact);
+	  res.redirect('/viewcontact');
+	} catch (err) {
+	  console.log(err);
+	  res.redirect('/viewcontact');
 	}
-	catch(err){
-		console.log("post conatct api catch error ended")
-		console.log(err)
-	}
-})
+  });
+  
