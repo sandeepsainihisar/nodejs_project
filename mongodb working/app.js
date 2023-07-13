@@ -42,6 +42,7 @@ var sessionChecker = (req, res, next) => {
 
 
 require("./model/connection")
+var infoLogger = require('./common/logger');
 var User = require('./model/registrationSchema');
 
 var Contact = require('./model/contactschema');
@@ -97,6 +98,7 @@ app.set('view engine', 'ejs');
 
 router.get('/', function (req, res) {
 	res.render('index');
+	infoLogger("hi logged in ");
 });
 
 
@@ -308,7 +310,7 @@ router.get('/viewcontact', async (req, res) => {
 //23052023 dated 
 
 // delete user by id
-router.get('/delete/register/:id', async (req, res) => {
+router.get('/deleteregister/:id', async (req, res) => {
 	User.findByIdAndDelete(req.params.id).then(user => {
 		if (user) {
 			console.log("get_deleteregister if")
@@ -342,21 +344,22 @@ router.get('/deleteproduct/:id', async (req, res) => {
 
 
 
-router.get('/edit', function (req, res) {
-	res.render('dashboaard/edit');
-});
+// router.get('/edit', function (req, res) {
+// 	res.render('dashboaard/edit');
+// });
 
 
 // 24052023
 router.get('/editregister/:id', async (req, res) => {
 	try {
 		const update = await User.findById(req.params.id);
-		res.render('Dashboard/edit', { data: update });
+		res.render('Dashboard/editregister', { data: update });
 	} catch (err) {
 		console.log(err);
 		//res.redirect('/viewregistration')
 	}
 });
+
 router.post('/editregister/:id', async (req, res) => {
 	var updatelogin = {
 		username: req.body.username,
@@ -368,7 +371,7 @@ router.post('/editregister/:id', async (req, res) => {
 		await User.findByIdAndUpdate(req.params.id, updatelogin);
 		res.redirect('/viewregister');
 	} catch (err) {
-		res.redirect('/edit' + req.params.id);
+		res.redirect('/editregister' + req.params.id);
 	}
 });
 
@@ -377,11 +380,12 @@ router.post('/editregister/:id', async (req, res) => {
 
 router.get('/editproduct/:id', async (req, res) => {
 	try {
+		console.log("edit_product try succesfull");
 		const productupdate = await Product.findById(req.params.id);
-		res.render('Dashboard/edit', { data: productupdate });
+		res.render('Dashboard/editproduct', { data: productupdate });
 	} catch (err) {
 		console.log(err);
-		//res.redirect('/viewregistration')
+		//res.redirect('/viewproduct')
 	}
 });
 router.post('/editproduct/:id', async (req, res) => {
@@ -462,30 +466,59 @@ app.get("/logout",(req,res)=>{
 		res.redirect("/login")
 	}
 });
+
 router.get('/editcontact/:id',async(req,res)=>{
 	try{
+		console.log("edit_get try contact worked")
 		const data=await Contact.findById(req.params.id);
 		console.log(data);
-		res.render('dashboard/product_edit',{data:data});
+		res.render('dashboard/editcontact',{data:data});
 	} catch (err){
 		console.log(err);
 	}
 });
-router.post('editcontact/:id',async (req,res)=>{
+
+// router.post('editcontact/:id',async (req,res)=>{
+// 	try{
+// 		console.log("edit post contact try entered")
+// 		const updateviewcontact = {
+// 			namecon:req.body.namecon,
+// 			emailcon:req.body.emailcon,
+// 			subjectcon:req.body.subjectcon,
+// 			msgcon:req.body.msgcon
+			
+
+// 		};
+// 		const data = await Contact.findByIdAndUpdate(req.params.id,updateviewcontact)
+// 		console.log(data)
+// 		res.render('/dashboard/viewcontact',{data:data})
+// 		res.redirect('viewcontact')
+// 	}
+// 	catch(err){
+// 		console.log("post conatct api catch error ended")
+// 		console.log(err)
+// 	}
+// })
+
+
+router.post('/editcontact/:id', async (req, res) => {
 	try{
+		console.log("edit post contact try entered")
 		const updateviewcontact = {
-			details:req.body.details,
-			subdetails:req.body.subdetails,
-			enterdesc:req.body.enterdesc
+			namecon:req.body.namecon,
+			emailcon:req.body.emailcon,
+			subjectcon:req.body.subjectcon,
+			msgcon:req.body.msgcon
 			
 
 		};
-		const data = await User2.findByIdAndUpdate(req.params.id,updateviewcontact)
+		const data = await Contact.findByIdAndUpdate(req.params.id,updateviewcontact)
 		console.log(data)
-		res.render('/dashboard/viewproduct',{data:data})
-		res.redirect('vewproduct')
+		res.render('/dashboard/viewcontact',{data:data})
+		res.redirect('viewcontact')
 	}
 	catch(err){
+		console.log("post conatct api catch error ended")
 		console.log(err)
 	}
 })
