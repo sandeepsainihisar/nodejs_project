@@ -457,29 +457,6 @@ router.get('/editcontact/:id', async (req, res) => {
 	}
 });
 
-// router.post('editcontact/:id',async (req,res)=>{
-// 	try{
-// 		console.log("edit post contact try entered")
-// 		const updateviewcontact = {
-// 			namecon:req.body.namecon,
-// 			emailcon:req.body.emailcon,
-// 			subjectcon:req.body.subjectcon,
-// 			msgcon:req.body.msgcon
-
-
-// 		};
-// 		const data = await Contact.findByIdAndUpdate(req.params.id,updateviewcontact)
-// 		console.log(data)
-// 		res.render('/dashboard/viewcontact',{data:data})
-// 		res.redirect('viewcontact')
-// 	}
-// 	catch(err){
-// 		console.log("post conatct api catch error ended")
-// 		console.log(err)
-// 	}
-// })
-
-
 // router.post('/editcontact/:id', async (req, res) => {
 // 	try {
 // 		console.log("edit post contact try entered")
